@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from Profile.views import hackerform
+from Profile.views import hackerform, update
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^projects/$', hackerform),
+    url(r'^create/$', hackerform),
+    url(r'^profile/(?P<id>\d+)/$', update),
 ]
