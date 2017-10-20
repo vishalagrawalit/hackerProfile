@@ -27,12 +27,25 @@ def hackerform(request):
 def update(request, id=None):
     if request.method == "POST":
         instance = get_object_or_404(Hacker, id=id)
+
+        # CodeChef
         CC = instance.CodeChef_username
         CC = codechef(CC)
+
+        # HackerEarth
         HE = instance.HackerEarth_username
         HE = hackerEarth(HE)
-        instance.problems_solved = CC[0]
-        instance.ratings = HE[0] + CC[1]
+
+        # HackerRank
+        HR = instance.HackerRank_username
+        HR = hackerrank(HR)
+
+        # SPOJ
+        SP = instance.SPOJ_username
+        SP = spoj(SP)
+
+        instance.problems_solved = CC[0] + HE[0] + HR[0] + SP[0]
+        instance.ratings = CC[1] + HE[1] + HR[1] + SP[1]
         instance.save()
 
         instance = get_object_or_404(Hacker, id=id)
