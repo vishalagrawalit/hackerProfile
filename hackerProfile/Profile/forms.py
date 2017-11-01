@@ -7,14 +7,12 @@ class ProfileEdit(forms.ModelForm):
         model = Hacker
         fields = [
             'display_name',
+            'full_name',
             'display_picture',
             'CodeChef_username',
             'CodeForces_username',
             'HackerRank_username',
             'HackerEarth_username',
-            'InterviewBit_username',
-            'LeetCode_username',
             'SPOJ_username',
             'GitHub_username',
-            'BitBucket_username',
         ]

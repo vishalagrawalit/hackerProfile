@@ -12,7 +12,64 @@ def codechef(username):
     problems = soup.select('div h5')
     solved = problems[0].get_text()
     details.append(int(solved[14:len(solved) - 1]))
-    details.append(int(data[0].get_text()))
+    details.append(data[0].get_text())
+    return details
+
+
+def codeforces(username):
+    details = []
+    flag2 = 0
+    url = "http://codeforces.com/contests/with/" + username
+
+    page = requests.get(url)
+    soup = BeautifulSoup(page.content, 'html.parser')
+
+    pro = []
+    data = soup.find('div', class_="datatable")
+    data = data.text
+    data = data.strip()
+
+    for i in range(len(data)):
+        if data[i] != " " and data[i] != "\n" and data[i] != "\r":
+            pro.append(data[i])
+
+    i = 49
+    if i >= len(pro):
+        details.append(0)
+    else:
+        number = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+        total = ""
+
+        while pro[i] in number:
+            total += pro[i]
+            i += 1
+
+        details.append(int(total))
+
+    url = "http://codeforces.com/profile/" + username
+
+    page = requests.get(url)
+    soup = BeautifulSoup(page.content, 'html.parser')
+
+    data = soup.find_all('div', class_="info")
+    data = data[0].text
+    data = data.strip()
+    data = data.split("\n")
+
+    for i in range(len(data)):
+        data[i] = data[i].strip()
+
+    for i in range(len(data)):
+        if data[i] == "Contest rating:":
+            d = data[i + 2]
+            details.append(int(d[:4]))
+            flag2 = 1
+            break
+
+    if flag2 == 0:
+        details.append(0)
+
+    print(details[0])
     return details
 
 
@@ -75,32 +132,21 @@ def hackerrank(username):
 
     details.append(sum(pro))
 
-    url = "https://www.hackerrank.com/rest/hackers/" + username + "/hacker_level"
-
+    url = "https://www.hackerrank.com/rest/hackers/" + username + "/rating_histories_elo"
+    number = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.']
     page = requests.get(url)
     soup = BeautifulSoup(page.content, 'html.parser')
     data = soup.findAll(text=True)
-
-    dd = 0
-    string = ""
-    number = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.']
-    for i in range(len(data[0])):
-        if dd == 2:
-            dd = 0
-            if string == "contest_points":
-                string = ""
-                j = i + 1
-                while j < len(data[0]) and data[0][j] != ',':
-                    if data[0][j] in number:
-                        string += data[0][j]
-                    j += 1
-                details.append(float(string))
+    rank = data[0][-75:-60]
+    flag = 0
+    total = ""
+    for i in range(len(rank)):
+        if rank[i] in number or flag == 1:
+            total += rank[i]
+            flag = 1
+            if len(total) == 5:
                 break
-            string = ""
-        elif data[0][i] == '"':
-            dd += 1
-        elif dd == 1:
-            string += data[0][i]
+    details.append(float(total))
 
     return details
 

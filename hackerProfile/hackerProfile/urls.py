@@ -13,12 +13,18 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+from django.conf import settings
+from django.conf.urls.static import static
 from django.conf.urls import url
 from django.contrib import admin
-from Profile.views import hackerform, update
+from Profile.views import hackerform, update, index
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^home/$', index),
     url(r'^create/$', hackerform),
     url(r'^profile/(?P<id>\d+)/$', update),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
