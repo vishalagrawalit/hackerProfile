@@ -17,14 +17,19 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls import url
 from django.contrib import admin
-from Profile.views import hackerform, update, index
+from Profile.views import hackerform, update, index, skillform, editbasicInfo, editskills, errorpage
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^home/$', index),
     url(r'^create/$', hackerform),
+    url(r'^create/(?P<id>\d+)/(?P<user>[\w.@+-]+)/$', skillform),
+    url(r'^edit/basic_info/(?P<id>\d+)/(?P<user>[\w.@+-]+)/$', editbasicInfo),
+    url(r'^edit/skills/(?P<id>\d+)/(?P<user>[\w.@+-]+)/$', editskills),
     url(r'^profile/(?P<id>\d+)/$', update),
+    url(r'^error/$', errorpage),
 ]
 
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

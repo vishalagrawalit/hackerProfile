@@ -4,21 +4,6 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>{{ instance.display_name }}</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Free HTML5 Website Template by freehtml5.co" />
-	<meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
-	<meta name="author" content="freehtml5.co" />
-
-  	<!-- Facebook and Twitter integration -->
-	<meta property="og:title" content=""/>
-	<meta property="og:image" content=""/>
-	<meta property="og:url" content=""/>
-	<meta property="og:site_name" content=""/>
-	<meta property="og:description" content=""/>
-	<meta name="twitter:title" content="" />
-	<meta name="twitter:image" content="" />
-	<meta name="twitter:url" content="" />
-	<meta name="twitter:card" content="" />
 
 	<link href="https://fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
@@ -32,34 +17,87 @@
 
 	<!-- Theme style  -->
 	<link rel="stylesheet" href="/static/css/style.css">
+        <link rel="stylesheet" href="/static/css/landing-page.css">
 
 	<!-- Modernizr JS -->
 	<script src="/static/js/modernizr-2.6.2.min.js"></script>
 
 	</head>
 	<body>
-		
+
 	<div class="fh5co-loader"></div>
 	
 	<div id="page">	
-	<header id="fh5co-header" class="fh5co-cover js-fullheight" role="banner" style="background-image:url(/static/img/cover_bg_3.jpg);" data-stellar-background-ratio="0.5">
+	<header id="fh5co-header" class="fh5co-cover js-fullheight role="banner"
+            style="background-image:url(/static/img/cover_bg_3.jpg);"
+            data-stellar-background-ratio="0.5">
 		<div class="overlay"></div>
 		<div class="container">
+            <nav class="navbar navbar-transparent navbar-top" role="navigation">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button id="menu-toggle" type="button" class="navbar-toggle"
+                            data-toggle="collapse" data-target="#example">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar bar1"></span>
+                    <span class="icon-bar bar2"></span>
+                    <span class="icon-bar bar3"></span>
+                    </button>
+                    <a href="http://127.0.0.1:8000/home">
+                        <div class="logo-container">
+                            <div class="logo">
+                                <img src="/static/img/new_logo.png" alt="Creative Tim Logo">
+                            </div>
+                            <div class="brand">
+                                Hacker Profile
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="example" >
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#">
+                            <h4 style="color:#fff;">Update Profile</h4>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://127.0.0.1:8000/edit/basic_info/{{ instance.id }}/{{ instance.display_name }}">
+                            <h4 style="color:#fff;">Edit Basic Info</h4>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://127.0.0.1:8000/edit/skills/{{ instance.id }}/{{ instance.display_name }}">
+                            <h4 style="color:#fff;">Edit Skills</h4>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+        </nav>
 			<div class="row">
 				<div class="col-md-8 col-md-offset-2 text-center">
-					<div class="display-t js-fullheight">
-						<div class="display-tc js-fullheight animate-box" data-animate-effect="fadeIn">
-							<div class="profile-thumb" style="background: url(/static/img/user-3.jpg);"></div>
+					<div class="display-t">
+						<div class="display-tc animate-box" data-animate-effect="fadeIn">
+							<div class="profile-thumb" style="background: url({{ instance.display_picture.url }});"></div>
 							<h1><span>{{ instance.full_name }}</span></h1>
-							<h3><span>Web Developer / Photographer</span></h3>
+							<h3><span>{{ basic_info.best_known_as }}</span></h3>
 							<p>
 								<ul class="fh5co-social-icons">
-									<li><a href="#"><i class="icon-twitter2"></i></a></li>
-									<li><a href="#"><i class="icon-facebook2"></i></a></li>
-									<li><a href="#"><i class="icon-linkedin2"></i></a></li>
-									<li><a href="#"><i class="icon-dribbble2"></i></a></li>
+									<li><a href="{{ basic_info.twitter }}" target="_blank">
+                                        <i class="icon-twitter2"></i></a></li>
+									<li><a href="{{ basic_info.facebook }}" target="_blank">
+                                        <i class="icon-facebook2"></i></a></li>
+									<li><a href="{{ basic_info.linkedin }}" target="_blank">
+                                        <i class="icon-linkedin2"></i></a></li>
+									<li><a href="{{ basic_info.website }}" target="_blank">
+                                        <i class="icon-dribbble2"></i></a></li>
 								</ul>
 							</p>
+                            <h3><span>{{ instance.profile_view }} times people viewed your profile.</span></h3>
 						</div>
 					</div>
 				</div>
@@ -67,114 +105,57 @@
 		</div>
 	</header>
 
-	<div id="fh5co-resume" class="fh5co-bg-color">
-		<div class="container">
-			<div class="row animate-box">
-				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-					<h2>My Resume</h2>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12 col-md-offset-0">
-					<ul class="timeline">
-						<li class="timeline-heading text-center animate-box">
-							<div><h3>Work Experience</h3></div>
-						</li>
-						<li class="animate-box timeline-unverted">
-							<div class="timeline-badge"><i class="icon-suitcase"></i></div>
-							<div class="timeline-panel">
-								<div class="timeline-heading">
-									<h3 class="timeline-title">Senior Developer</h3>
-									<span class="company">Company Name - 2016 - Current</span>
-								</div>
-								<div class="timeline-body">
-									<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-								</div>
-							</div>
-						</li>
-						<li class="timeline-inverted animate-box">
-							<div class="timeline-badge"><i class="icon-suitcase"></i></div>
-							<div class="timeline-panel">
-								<div class="timeline-heading">
-									<h3 class="timeline-title">Junior Developer</h3>
-									<span class="company">Company Name - 2013 - 2015</span>
-								</div>
-								<div class="timeline-body">
-									<p>Far far away, behind the word mountains, they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-								</div>
-							</div>
-						</li>
-						<li class="animate-box timeline-unverted">
-							<div class="timeline-badge"><i class="icon-suitcase"></i></div>
-							<div class="timeline-panel">
-								<div class="timeline-heading">
-									<h3 class="timeline-title">UI/UX Designer</h3>
-									<span class="company">Company Name - 2010 - 2012</span>
-								</div>
-								<div class="timeline-body">
-									<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-								</div>
-							</div>
-						</li>
-
-						<br>
-						<li class="timeline-heading text-center animate-box">
-							<div><h3>Education</h3></div>
-						</li>
-						<li class="timeline-inverted animate-box">
-							<div class="timeline-badge"><i class="icon-graduation-cap"></i></div>
-							<div class="timeline-panel">
-								<div class="timeline-heading">
-									<h3 class="timeline-title">Masters Degree</h3>
-									<span class="company">University Name - 2007 - 2009</span>
-								</div>
-								<div class="timeline-body">
-									<p>Far far away, behind the word mountains, they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-								</div>
-							</div>
-						</li>
-						<li class="animate-box timeline-unverted">
-							<div class="timeline-badge"><i class="icon-graduation-cap"></i></div>
-							<div class="timeline-panel">
-								<div class="timeline-heading">
-									<h3 class="timeline-title">Bachelors Degree</h3>
-									<span class="company">University Name - 2002 - 2006</span>
-								</div>
-								<div class="timeline-body">
-									<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-								</div>
-							</div>
-						</li>
-						<li class="timeline-inverted animate-box">
-							<div class="timeline-badge"><i class="icon-graduation-cap"></i></div>
-							<div class="timeline-panel">
-								<div class="timeline-heading">
-									<h3 class="timeline-title">Diploma Course</h3>
-									<span class="company">College Name - 1999 - 2001</span>
-								</div>
-								<div class="timeline-body">
-									<p>Far far away, behind the word mountains, they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-								</div>
-							</div>
-						</li>
-						<li class="animate-box timeline-unverted">
-							<div class="timeline-badge"><i class="icon-graduation-cap"></i></div>
-							<div class="timeline-panel">
-								<div class="timeline-heading">
-									<h3 class="timeline-title">Graduation</h3>
-									<span class="company">College Name - 1994 - 1998</span>
-								</div>
-								<div class="timeline-body">
-									<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-								</div>
-							</div>
-						</li>
-			    	</ul>
-				</div>
-			</div>
-		</div>
-	</div>
-	
+        <div id="fh5co-skills" class="animate-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
+                    <h2>Skills</h2>
+                </div>
+            </div>
+            <div class="row row-pb-md">
+                {% if skill_level.skill1 %}
+                <div class="col-md-3 col-sm-6 col-xs-12 text-center">
+                    <div class="chart" data-percent="{{ skill_level.percent1 }}"><span><strong>{{ skill_level.skill1 }}</strong>{{ skill_level.percent1 }}%</span></div>
+                </div>
+                {% endif %}
+                {% if skill_level.skill2 %}
+                <div class="col-md-3 col-sm-6 col-xs-12 text-center">
+                    <div class="chart" data-percent="{{ skill_level.percent2 }}"><span><strong>{{ skill_level.skill2 }}</strong>{{ skill_level.percent2 }}%</span></div>
+                </div>
+                {% endif %}
+                {% if skill_level.skill3 %}
+                <div class="col-md-3 col-sm-6 col-xs-12 text-center">
+                    <div class="chart" data-percent="{{ skill_level.percent3 }}"><span><strong>{{ skill_level.skill3 }}</strong>{{ skill_level.percent3 }}%</span></div>
+                </div>
+                {% endif %}
+                {% if skill_level.skill4 %}
+                <div class="col-md-3 col-sm-6 col-xs-12 text-center">
+                    <div class="chart" data-percent="{{ skill_level.percent4 }}"><span><strong>{{ skill_level.skill4 }}</strong>{{ skill_level.percent4 }}%</span></div>
+                </div>
+                {% endif %}
+                {% if skill_level.skill5 %}
+                <div class="col-md-3 col-sm-6 col-xs-12 text-center">
+                    <div class="chart" data-percent="{{ skill_level.percent5 }}"><span><strong>{{ skill_level.skill5 }}</strong>{{ skill_level.percent5 }}%</span></div>
+                </div>
+                {% endif %}
+                {% if skill_level.skill6 %}
+                <div class="col-md-3 col-sm-6 col-xs-12 text-center">
+                    <div class="chart" data-percent="{{ skill_level.percent6 }}"><span><strong>{{ skill_level.skill6 }}</strong>{{ skill_level.percent6 }}%</span></div>
+                </div>
+                {% endif %}
+                {% if skill_level.skill7 %}
+                <div class="col-md-3 col-sm-6 col-xs-12 text-center">
+                    <div class="chart" data-percent="{{ skill_level.percent7 }}"><span><strong>{{ skill_level.skill7 }}</strong>{{ skill_level.percent7 }}%</span></div>
+                </div>
+                {% endif %}
+                {% if skill_level.skill8 %}
+                <div class="col-md-3 col-sm-6 col-xs-12 text-center">
+                    <div class="chart" data-percent="{{ skill_level.percent8 }}"><span><strong>{{ skill_level.skill8 }}</strong>{{ skill_level.percent8 }}%</span></div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 
 	<div id="fh5co-features" class="animate-box">
 		<div class="container">
@@ -184,200 +165,146 @@
 						<h2>Competitive Programming</h2>
 					</div>
 				</div>
+				<div class="container">
+                    <div class="row">
+        {% if instance.CodeChef_username %}
+                <div class="col-sm-3">
+                    <div class="thumbnail">
+                        <h3><center>CodeChef</center></h3>
+                      <a href="http://codechef.com/users/{{ instance.CodeChef_username }}"><img src='/static/img/loc.png' style="overflow:hidden; height:25px">
+                      </a>
+                        <center>
+                        <h6><center>Problems Solved- {{ instance.CodeChef_problem }}</center></h6>
+                        <h6><center>Current Rating-{{ instance.CodeChef_rating }}</center></h6>
 
-				<div class="row">
-					<div class="col-md-4 text-center">
+                        <a href="http://codechef.com/users/{{ instance.CodeChef_username }}" target="_blank"
+                               class="btn btn-primary btn-sm" role="button">Visit Profile</a>
+                        </center>
+                    </div>
+                </div>
+        {% endif %}
+        {% if instance.CodeForces_username %}
+                <div class="col-sm-3">
+                    <div class="thumbnail">
+                    	<h3><center>CodeForces<center></h3>
+                      <a href="http://codeforces.com/profile/{{ instance.CodeForces_username }}"><img src='/static/img/loc.png' style="overflow:hidden; height:25px">
+                      </a>
+                        <center>
+                        <h6><center>Contest Played-{{ instance.CodeForces_contest }}</center></h6>
+                        <h6><center>Current Rating-{{ instance.CodeForces_rating }}</center></h6>
 
-						<div class="feature-left">
-							<span class="icon">
-								<i class="icon-bargraph"></i>
-							</span>
-							<div class="feature-copy">
-								<h3>{{ instance.problems_solved }}</h3>
-								<p>{{ instance.CodeChef_username }}</p>
-								<p>{{ instance.CodeChef_problem }}</p>
-								<p>{{ instance.CodeChef_rating }}</p>
-								<p>{{ instance.CodeForces_username }}</p>
-								<p>{{ instance.CodeForces_contest }}</p>
-								<p>{{ instance.CodeForces_rating }}</p>
-								<p>{{ instance.HackerRank_username }}</p>
-								<p>{{ instance.HackerRank_problem }}</p>
-								<p>{{ instance.HackerRank_rating }}</p>
-							</div>
-						</div>
+                        <a href="http://codeforces.com/profile/{{ instance.CodeForces_username }}" target="_blank"
+                               class="btn btn-primary btn-sm" role="button">Visit Profile</a>
+                        </center>
+                    </div>
+                </div>
+        {% endif %}
+        {% if instance.HackerRank_username %}
+                <div class="col-sm-3">
+                    <div class="thumbnail">
+                        <h3><center>HackerRank</center></h3>
+                      <a href="http://hackerrank.com/{{ instance.HackerRank_username }}"><img src='/static/img/loc.png' style="overflow:hidden; height:25px">
+                      </a>
+                        <center>
+                        <h6><center>Problems Solved- {{ instance.HackerRank_problem }}</center></h6>
+                        <h6><center>Current Rating-{{ instance.HackerRank_rating }}</center></h6>
 
-					</div>
-				</div>
+                        <a href="http://hackerrank.com/{{ instance.HackerRank_username }}" target="_blank"
+                               class="btn btn-primary btn-sm" role="button">Visit Profile</a>
+                        </center>
+                    </div>
+                </div>
+        {% endif %}
+        {% if instance.HackerEarth_username %}
+                <div class="col-sm-3">
+                    <div class="thumbnail">
+                        <h3><center>HackerEarth</center></h3>
+                      <a href="http://hackerearth.com/@{{ instance.HackerEarth_username }}"><img src='/static/img/loc.png' style="overflow:hidden; height:25px">
+                      </a>
+                        <center>
+                        <h6><center>Problems Solved- {{ instance.HackerEarth_problem }}</center></h6>
+                        <h6><center>Current Rating-{{ instance.HackerEarth_rating }}</center></h6>
+
+                        <a href="http://codechef.com/users/{{ instance.CodeChef_username }}" target="_blank"
+                               class="btn btn-primary btn-sm" role="button">Visit Profile</a>
+                        </center>
+                    </div>
+                </div>
+        {% endif %}
+        {% if instance.SPOJ_username %}
+                <div class="col-sm-3">
+                    <div class="thumbnail">
+                        <h3><center>SPOJ</center></h3>
+                      <a href="http://hackerearth.com/@{{ instance.HackerEarth_username }}"><img src='/static/img/loc.png' style="overflow:hidden; height:25px">
+                      </a>
+                        <center>
+                            <h6><center>Problems Solved- {{ instance.SPOJ_problem }}</center></h6>
+                            <h6><center>Current Rating-{{ instance.SPOJ_rating }}</center></h6>
+
+                            <a href="http://codechef.com/users/{{ instance.CodeChef_username }}" target="_blank"
+                               class="btn btn-primary btn-sm" role="button">Visit Profile</a>
+                        </center>
+                    </div>
+                </div>
+        {% endif %}
+    </div>
+                </div>
 			</div>
 		</div>
 	</div>
+            <div id="fh5co-work">
+        <div class="container">
+            <div class="row animate-box">
+                <div class="col-md-8 col-md-offset-2 text-center">
+                    <h2>Github's Public Repositories</h2>
+                </div>
+            </div>
+            <br/>
+            <center>
+            <a href="http://github.com/{{ instance.GitHub_username }}" target="_blank"
+                  class="btn btn-danger btn-md">
+                {{ instance.full_name }}'s Github Profile
+            </a>
+            <a href="#" target="_blank"
+                  class="btn btn-danger btn-md">
+                Total Number of Public Repositories - {{ instance.GitHub_repo }}
+            </a>
+            </center>
+            <br/>
+            <div class="row">
+                {% for repo in repo_list %}
+                <div class="col-md-6">
+                <h3> {{ repo.repo_name}}</h3>
+                <h4> {{ repo.repo_description|truncatechars:50 }}</h4>
+                <p><a href="{{ repo.repo_link }}" target="_blank"
+                      class="btn btn-danger btn-md">
+                    Visit Repository
+                </a></p>
+                <br/>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 
-	<div id="fh5co-skills" class="animate-box">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-					<h2>Skills</h2>
-				</div>
-			</div>
-			<div class="row row-pb-md">
-				<div class="col-md-3 col-sm-6 col-xs-12 text-center">
-					<div class="chart" data-percent="95"><span><strong>HTML5</strong>95%</span></div>
-				</div>
-				<div class="col-md-3 col-sm-6 col-xs-12 text-center">
-					<div class="chart" data-percent="93"><span><strong>CSS3</strong>93%</span></div>
-				</div>
-				<div class="col-md-3 col-sm-6 col-xs-12 text-center">
-					<div class="chart" data-percent="90"><span><strong>jQuery</strong>90%</span></div>
-				</div>
-
-				<div class="col-md-3 col-sm-6 col-xs-12 text-center">
-					<div class="chart" data-percent="89"><span><strong>PHP</strong>89%</span></div>
-				</div>
-				<div class="col-md-3 col-sm-6 col-xs-12 text-center">
-					<div class="chart" data-percent="85"><span><strong>MySQL</strong>85%</span></div>
-				</div>
-				<div class="col-md-3 col-sm-6 col-xs-12 text-center">
-					<div class="chart" data-percent="90"><span><strong>AngularJS</strong>90%</span></div>
-				</div>
-				<div class="col-md-3 col-sm-6 col-xs-12 text-center">
-					<div class="chart" data-percent="85"><span><strong>Ruby</strong>85%</span></div>
-				</div>
-				<div class="col-md-3 col-sm-6 col-xs-12 text-center">
-					<div class="chart" data-percent="90"><span><strong>Java</strong>90%</span></div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-6">
-					<div class="progress-wrap">
-						<h3><span class="name-left">HTML5/CSS3</span><span class="value-right">95%</span></h3>
-						<div class="progress">
-						  <div class="progress-bar progress-bar-1 progress-bar-striped active" role="progressbar"
-						  aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width:90%">
-						  </div>
-						</div>
-					</div>
-					<div class="progress-wrap">
-						<h3><span class="name-left">WordPress</span><span class="value-right">90%</span></h3>
-						<div class="progress">
-						  <div class="progress-bar progress-bar-2 progress-bar-striped active" role="progressbar"
-						  aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width:90%">
-						  </div>
-						</div>
-					</div>
-					<div class="progress-wrap">
-						<h3><span class="name-left">PHP</span><span class="value-right">80%</span></h3>
-						<div class="progress">
-						  <div class="progress-bar progress-bar-3 progress-bar-striped active" role="progressbar"
-						  aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width:80%">
-						  </div>
-						</div>
-					</div>
-					<div class="progress-wrap">
-						<h3><span class="name-left">Java</span><span class="value-right">85%</span></h3>
-						<div class="progress">
-						  <div class="progress-bar progress-bar-4 progress-bar-striped active" role="progressbar"
-						  aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width:85%">
-						  </div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="progress-wrap">
-						<h3><span class="name-left">Design</span><span class="value-right">100%</span></h3>
-						<div class="progress">
-						  <div class="progress-bar progress-bar-5 progress-bar-striped active" role="progressbar"
-						  aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">
-						  </div>
-						</div>
-					</div>
-					<div class="progress-wrap">
-						<h3><span class="name-left">Ruby</span><span class="value-right">70%</span></h3>
-						<div class="progress">
-						  <div class="progress-bar progress-bar-striped active" role="progressbar"
-						  aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">
-						  </div>
-						</div>
-					</div>
-					<div class="progress-wrap">
-						<h3><span class="name-left">Python</span><span class="value-right">85%</span></h3>
-						<div class="progress">
-						  <div class="progress-bar progress-bar-1 progress-bar-striped active" role="progressbar"
-						  aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width:85%">
-						  </div>
-						</div>
-					</div>
-					<div class="progress-wrap">
-						<h3><span class="name-left">jQuery</span><span class="value-right">75%</span></h3>
-						<div class="progress">
-						  <div class="progress-bar progress-bar-3 progress-bar-striped active" role="progressbar"
-						  aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width:75%">
-						  </div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div id="fh5co-work" class="fh5co-bg-dark">
-		<div class="container">
-			<div class="row animate-box">
-				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-					<h2>Repository</h2>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-3 text-center col-padding animate-box">
-					<a href="#" class="work" style="background-image: url(/static/img/portfolio-6.jpg);">
-						<div class="desc">
-							<h3>Project Name</h3>
-							<span>Illustration</span>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-3 text-center col-padding animate-box">
-					<a href="#" class="work" style="background-image: url(/static/img/portfolio-7.jpg);">
-						<div class="desc">
-							<h3>Project Name</h3>
-							<span>Brading</span>
-						</div>
-					</a>
-				</div>
-				<div class="col-md-3 text-center col-padding animate-box">
-					<a href="#" class="work" style="background-image: url(/static/img/portfolio-8.jpg);">
-						<div class="desc">
-							<h3>Project Name</h3>
-							<span>Illustration</span>
-						</div>
-					</a>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div id="fh5co-blog">
-		<div class="container">
-			<div class="row animate-box">
-				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-					<h2>Recent Submissions</h2>
-					<p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>
-				</div>
-			</div>
-		</div>
-	</div>
-	
-	<div id="fh5co-started" class="fh5co-bg-dark">
-		<div class="overlay"></div>
-		<div class="container">
-			<div class="row animate-box">
-				<div class="col-md-8 col-md-offset-2 text-center fh5co-heading">
-					<h2>Hire Me!</h2>
-					<p>Facilis ipsum reprehenderit nemo molestias. Aut cum mollitia reprehenderit. Eos cumque dicta adipisci architecto culpa amet.</p>
-					<p><a href="#" class="btn btn-default btn-lg">Contact Us</a></p>
-				</div>
-			</div>
-		</div>
-	</div>
+<footer class="footer">
+    <div class="container">
+        <div class="social-area pull-right">
+            <a class="btn btn-social btn-facebook btn-simple">
+                <i class="fa fa-facebook-square"></i>
+            </a>
+            <a class="btn btn-social btn-twitter btn-simple">
+                <i class="fa fa-twitter"></i>
+            </a>
+            <a class="btn btn-social btn-github btn-simple">
+                <i class="fa fa-github"></i>
+            </a>
+        </div>
+        <div class="copyright">
+            &copy; 2017 <a href="http://www.rcubedclub.herokuapp.com">RCubed</a>, made with love
+        </div>
+    </div>
+</footer>
 
 
 	<div class="gototop js-top">
@@ -396,8 +323,7 @@
 	<script src="/static/js/jquery.stellar.min.js"></script>
 	<!-- Easy PieChart -->
 	<script src="/static/js/jquery.easypiechart.min.js"></script>
-	<!-- Google Map -->
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCefOgb1ZWqYtj7raVSmN4PL2WkTrc-KyA&sensor=false"></script>
+
 	<script src="/static/js/google_map.js"></script>
 	
 	<!-- Main -->

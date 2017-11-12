@@ -180,4 +180,22 @@ def github(username):
     data = soup.find_all('span', class_="Counter")
     details.append(int(data[0].get_text()))
 
-    return details
+    url = "https://github.com/" + username + "?tab=repositories"
+    page = requests.get(url)
+    soup = BeautifulSoup(page.content, 'html.parser')
+    data = soup.find_all('div', class_="d-inline-block mb-1")
+    desc = soup.find_all('p', class_="col-9 d-inline-block text-gray mb-2 pr-4")
+
+    if len(data) == len(desc):
+        for i in range(len(data)):
+            string = data[i].text
+            string = string.strip()
+            string = string.split(" ")
+            link = "http://www.github.com/" + username + "/" + string[0]
+            description = desc[i].text
+            description = description.strip()
+            details.append((string[0], description, link))
+        return details
+
+    else:
+        return details
